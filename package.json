@@ -1,11 +1,22 @@
 {
-  "name": "guardian",
-  "version": "0.0.1",
-  "description": "authentication tool",
+  "name": "auth-guardian",
+  "version": "1.0.0",
+  "description": "auth-guardian a library for enhancing application security",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kajvan/guardian"
+  },
+  "keywords": [
+    "security",
+    "authentication",
+    "password",
+    "jwt",
+    "rate limiting"
+  ],
   "author": "kaj van schalkwijk",
   "license": "MIT",
   "dependencies": {
