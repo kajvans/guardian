@@ -46,7 +46,7 @@ class PassPolicy {
         return { valid: true };
     }
 
-    async CheckDifference(newPassword, oldPassword, neededDifference) {
+    CheckDifference(newPassword, oldPassword, neededDifference) {
         //check if new password is different from old password
         if (newPassword === oldPassword) {
             return { valid: false, message: "New password must be different from old password." };
