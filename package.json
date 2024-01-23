@@ -1,6 +1,6 @@
 {
   "name": "auth-guardian",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "auth-guardian a library for enhancing application security",
   "main": "index.js",
   "scripts": {
