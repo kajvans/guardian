@@ -12,7 +12,7 @@ class PasswordGenerator{
         this.options = { ...defaultOptions, ...options };
     }
 
-    Generate(){
+    async Generate(){
         // Generate random password that complies with the options
         const { minLength, maxLength, minLower, minUpper, minNum, minSpecial, specialChars } = this.options;
 

@@ -6,36 +6,36 @@ class JwtAuth{
         this.blacklist = [];
     }
 
-    async generateJWT(payload, settings, secretKey = this.JWTSecretKey) {
+    generateJWT(payload, settings, secretKey = this.JWTSecretKey) {
         return jwt.sign(payload, secretKey, settings);
     }
 
-    async verifyJWT(token, secretKey = this.JWTSecretKey) {
+    verifyJWT(token, secretKey = this.JWTSecretKey) {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
         return jwt.verify(token, secretKey);
     }
 
-    async decodeJWT(token) {
+    decodeJWT(token) {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
         return jwt.decode(token);
     }
 
-    async getJWTExpirationDate(token) {
+    getJWTExpirationDate(token) {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
-        const decoded = await this.decodeJWT(token);
+        const decoded = this.decodeJWT(token);
         return decoded.exp;
     }
 
-    async isJWTExpired(token) {
+    isJWTExpired(token) {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
-        const expirationDate = await this.getJWTExpirationDate(token);
+        const expirationDate = this.getJWTExpirationDate(token);
         return expirationDate < Date.now();
     }
 
-    async refreshJWT(token, settings, secretKey = this.JWTSecretKey) {
+    refreshJWT(token, settings, secretKey = this.JWTSecretKey) {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
-        const decoded = await this.verifyJWT(token, secretKey);
-        const newToken = await this.generateJWT(decoded, settings, secretKey);
+        const decoded = this.verifyJWT(token, secretKey);
+        const newToken = this.generateJWT(decoded, settings, secretKey);
         return newToken;
     }
 

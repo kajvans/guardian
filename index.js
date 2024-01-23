@@ -1,12 +1,12 @@
 const PassCheck = require('./passwordcheck');
-const JWTManager = require('./jwt');
+const JWTAuth = require('./jwt');
 const RateLimiter = require('./ratelimit');
 const PassPolicy = require('./passpolicy');
 const PasswordGenerator = require('./passgen');
 
 module.exports = {
     PassCheck,
-    JWTManager,
+    JWTAuth,
     RateLimiter,
     PassPolicy,
     PasswordGenerator

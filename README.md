@@ -13,7 +13,7 @@ This library is easy to integrate into your project and offers a comprehensive s
 To install Guardian, simply run the following command using npm:
 
 ```bash
-npm install Guardian
+npm install auth-guardian
 ```
 
 ## Features
@@ -39,6 +39,44 @@ Guardian offers a `RateLimiter` class to implement rate limits on actions like l
 Guardian's `PasswordGenerator` class allows you to generate strong, random passwords based on your specified criteria. This feature is invaluable when creating secure user accounts, managing password resets, or enhancing password security in your application.
 
 ## Usage/Examples
+
+### for imports
+
+#### import only jwtAuth
+
+```javascript
+const { JwtAuth } = require('guardian');
+```
+
+#### import only passPolicy
+
+```javascript
+const { PassPolicy } = require('guardian');
+```
+
+#### import only passCheck
+
+```javascript
+const { PassCheck } = require('guardian');
+```
+
+#### import only rateLimiter
+
+```javascript
+const { RateLimiter } = require('guardian');
+```
+
+#### import only passwordGenerator
+
+```javascript
+const { PasswordGenerator } = require('guardian');
+```
+
+#### import all
+
+```javascript
+const { JwtAuth, PassPolicy, PassCheck, RateLimiter, PasswordGenerator } = require('guardian');
+```
 
 ### JSON Web Token (JWT) Management - JwtAuth
 
@@ -257,7 +295,8 @@ const randomPassword = passwordGenerator.Generate();
 
 ## Authors
 
-- [kajvan](https://www.github.com/kajvan)
+- [kajvan](https://www.github.com/kajvans)
+- [kajvan](https://gitea.quiztimes.nl/kajvans)
 
 ## License
 
