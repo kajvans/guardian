@@ -18,9 +18,9 @@ class PasswordGenerator{
 
         let pass = "";
 
-        let lowerRegex = /[a-z]/g;
-        let upperRegex = /[A-Z]/g;
-        let numRegex = /[0-9]/g;
+        let lowerRegex = 'abcdefghijklmnopqrstuvwxyz';
+        let upperRegex = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let numRegex = '0123456789';
 
         // Generate password
         //generate random length
