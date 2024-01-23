@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const PassPolicy = require('./passpolicy.js');
 
 class PassCheck{
     constructor(BcryptSaltRounds, PassPolicyOptions) {

@@ -295,8 +295,8 @@ const randomPassword = passwordGenerator.Generate();
 
 ## Authors
 
-- [kajvan](https://www.github.com/kajvans)
-- [kajvan](https://gitea.quiztimes.nl/kajvans)
+- [kajvans](https://www.github.com/kajvans)
+- [kajvans](https://gitea.quiztimes.nl/kajvans)
 
 ## License
 
