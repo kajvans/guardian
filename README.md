@@ -13,7 +13,11 @@ This library is easy to integrate into your project and offers a comprehensive s
 To install Guardian, simply run the following command using npm:
 
 ```bash
+<<<<<<< HEAD
 npm install auth-guardian
+=======
+npm i auth-guardian
+>>>>>>> bf4b0a8ff8e8b6feccf129b6cf1bddddcf3d271e
 ```
 
 ## Features
