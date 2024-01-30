@@ -1,5 +1,5 @@
 {
-  "name": "auth-guardian",
+  "name": "@kajvans/auth-guardian",
   "version": "1.1.2",
   "description": "auth-guardian a library for enhancing application security",
   "main": "index.js",
