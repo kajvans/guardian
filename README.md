@@ -8,6 +8,8 @@ Guardian is a powerful JavaScript library designed to fortify your application's
 
 This library is easy to integrate into your project and offers a comprehensive set of features, making it a reliable choice for enhancing the security of your application.
 
+you can run it with TypeScript or JavaScript.
+
 ## Installation
 
 To install Guardian, simply run the following command using npm:

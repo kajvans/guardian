@@ -1,8 +1,10 @@
 {
-  "name": "@kajvans/auth-guardian",
-  "version": "2.0.0",
+  "name": "auth-guardian",
+  "version": "2.0.1",
   "description": "auth-guardian a library for enhancing application security",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "tsc"
