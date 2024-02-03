@@ -13,7 +13,7 @@ export default class PassPolicy {
         this.options = { ...defaultOptions, ...options };
     }
 
-    validate(password: string) {
+    validate(password: string): { valid: boolean, message?: string }{
         const { minLength, maxLength, minLower, minUpper, minNum, minSpecial, specialChars } = this.options;
 
         if (password.length < minLength || password.length > maxLength) {
@@ -46,7 +46,7 @@ export default class PassPolicy {
         return { valid: true };
     }
 
-    CheckDifference(newPassword: string, oldPassword: string, neededDifference: number = 3) {
+    CheckDifference(newPassword: string, oldPassword: string, neededDifference: number = 3): { valid: boolean, message?: string }{
         //check if new password is different from old password
         if (newPassword === oldPassword) {
             return { valid: false, message: "New password must be different from old password." };

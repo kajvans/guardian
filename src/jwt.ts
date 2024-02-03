@@ -19,7 +19,7 @@ export default class JwtAuth{
             const vertoken = jwt.verify(token, secretKey);
             
             if(vertoken instanceof Object) {
-                return vertoken;
+                return (vertoken);
             } else {
                 return undefined;
             }
@@ -30,22 +30,28 @@ export default class JwtAuth{
 
     decodeJWT(token: string) {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
-        return jwt.decode(token);
+        const decoded = jwt.decode(token);
+        if(decoded instanceof Object) {
+            return decoded;
+        } else {
+            return {valid: false, message: "Token is invalid."};
+        }
     }
 
-    getJWTExpirationDate(token: string) {
+    getJWTExpirationDate(token: string): number | { valid: boolean, message: string} {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
         const decoded = this.decodeJWT(token) as { [key: string]: any };
-        return decoded.exp;
+        return decoded.exp ;
     }
 
-    isJWTExpired(token: string) {
+    isJWTExpired(token: string): { valid: boolean, message: string} | boolean{
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
         const expirationDate = this.getJWTExpirationDate(token);
-        return expirationDate < Date.now();
+        if(expirationDate instanceof Object) return expirationDate;
+        return expirationDate < (Date.now() / 1000);
     }
 
-    refreshJWT(token: string, settings: jwt.SignOptions = {}, secretKey = this.JWTSecretKey) {
+    refreshJWT(token: string, settings: jwt.SignOptions = {}, secretKey = this.JWTSecretKey): string | { valid: boolean, message: string} {
         if(this.blacklist.includes(token)) return { valid: false, message: "Token is blacklisted." };
         const decoded = this.verifyJWT(token, secretKey);
 
@@ -66,7 +72,7 @@ export default class JwtAuth{
         return { valid: false, message: "Token is invalid." };
     }
 
-    BlackListJWT(token: string) {
+    BlackListJWT(token: string): { valid: boolean, message: string}{
         //check if token is already blacklisted
         if (this.blacklist.includes(token)) {
             return { valid: false, message: "Token is already blacklisted." };
@@ -76,18 +82,18 @@ export default class JwtAuth{
         return { valid: true, message: "Token successfully blacklisted."};
     }
 
-    ClearBlackList() {
+    ClearBlackList(): { valid: boolean, message: string}{
         //clear blacklist
         this.blacklist = [];
         return { valid: true, message: "Blacklist successfully cleared."};
     }
 
-    GetBlackList() {
+    GetBlackList(): string[] {
         //return blacklist
         return this.blacklist;
     }
 
-    RemoveFromBlackList(token: string) {
+    RemoveFromBlackList(token: string): { valid: boolean, message: string}{
         //remove token from blacklist
         if (this.blacklist.includes(token)) {
             this.blacklist = this.blacklist.filter((item) => item !== token);
@@ -96,7 +102,7 @@ export default class JwtAuth{
         return { valid: false, message: "Token is not blacklisted." };
     }
 
-    IsBlackListed(token: string) {
+    IsBlackListed(token: string): { valid: boolean, message: string}{
         //check if token is blacklisted
         if (this.blacklist.includes(token)) {
             return { valid: true, message: "Token is blacklisted." };

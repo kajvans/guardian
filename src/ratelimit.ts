@@ -17,7 +17,7 @@ export default class RateLimit {
         this.events = events;
     }
 
-    public addEvent(event: Event) {
+    public addEvent(event: Event): boolean {
         try{
             this.events[event.name] = event;
 
@@ -32,7 +32,7 @@ export default class RateLimit {
         }
     }
 
-    public removeEvent(name: string) {
+    public removeEvent(name: string): boolean {
         try{
             delete this.events[name];
 
@@ -47,7 +47,7 @@ export default class RateLimit {
         }
     }
 
-    public addUser(token: string) {
+    public addUser(token: string): boolean {
         try{
             this.users[token] = { token, events: this.events };
             return true;
@@ -56,7 +56,7 @@ export default class RateLimit {
         }
     }
 
-    public removeUser(token: string) {
+    public removeUser(token: string): boolean {
         try{
             delete this.users[token];
             return true;
@@ -65,7 +65,7 @@ export default class RateLimit {
         }
     }
 
-    public attempt(token: string, name: string) {
+    public attempt(token: string, name: string): boolean {
         try{
             if (!this.users[token] || !this.users[token].events[name]) {
                 return false;
@@ -96,23 +96,23 @@ export default class RateLimit {
         }
     }
 
-    public getEvents() {
+    public getEvents(): { [name: string]: Event}{
         return this.events;
     }
 
-    public getUsers() {
+    public getUsers(): { [token: string]: user}{
         return this.users;
     }
 
-    public getEvent(name: string) {
+    public getEvent(name: string): Event {
         return this.events[name];
     }
 
-    public getUser(token: string) {
+    public getUser(token: string): user {
         return this.users[token];
     }
 
-    public remainingAttempts(token: string, name: string) {
+    public remainingAttempts(token: string, name: string): number {
         try{
             if (!this.users[token] || !this.users[token].events[name]) {
                 return -1;
@@ -130,7 +130,7 @@ export default class RateLimit {
         }
     }
 
-    public resetAttempts(token: string, name: string) {
+    public resetAttempts(token: string, name: string): boolean {
         try{
             if (!this.users[token] || !this.users[token].events[name]) {
                 return false;
@@ -145,7 +145,7 @@ export default class RateLimit {
         }
     }
 
-    public resetAllAttempts(token: string) {
+    public resetAllAttempts(token: string): boolean {
         try{
             if (!this.users[token]) {
                 return false;
@@ -161,7 +161,7 @@ export default class RateLimit {
         }
     }
 
-    public resetAllUsers() {
+    public resetAllUsers(): boolean {
         try{
             for (const token in this.users) {
                 this.resetAllAttempts(token);
@@ -173,7 +173,7 @@ export default class RateLimit {
         }
     }
 
-    public resetEvent(name: string) {
+    public resetEvent(name: string): boolean {
         try{
             for (const token in this.users) {
                 this.resetAttempts(token, name);
@@ -185,7 +185,7 @@ export default class RateLimit {
         }
     }
 
-    public resetUser(token: string) {
+    public resetUser(token: string): boolean {
         try{
             for (const name in this.users[token].events) {
                 this.resetAttempts(token, name);

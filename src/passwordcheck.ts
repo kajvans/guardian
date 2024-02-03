@@ -9,11 +9,11 @@ export default class PassCheck{
         this.PassPolicy = new PassPolicy(PassPolicyOptions);
     }
 
-    async verifyPassword(password: string, hash: string) {
+    async verifyPassword(password: string, hash: string): Promise<boolean> {
         return await bcrypt.compare(password, hash);
     }
 
-    async hashPassword(password: string) {
+    async hashPassword(password: string): Promise<string> {
         const salt = await bcrypt.genSalt(this.BcryptSaltRounds);
         const hash = await bcrypt.hash(password, salt);
         return hash;

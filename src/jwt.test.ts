@@ -16,17 +16,17 @@ describe('JWT', () => {
         expect(token).toBeDefined();
       });
 
-    it('should verify a JWT', () => {
-        const token = jwt.generateJWT({ username: user.username, password: user.password });
-        const verified = jwt.verifyJWT(token);
-        //check  if username inside the token is equal to the username of the user check this in two lines of code
-        expect(verified).toBeDefined();
-        if (typeof verified !== 'string') {
-            // verified is JwtPayload
-            if(verified == null) fail('Token verification failed');
-            expect(verified.username).toEqual(user.username);
+      test('should return token object when valid token is provided', () => {
+        // Arrange
+        const validToken = jwt.generateJWT(user);
+
+        // Act
+        const result = jwt.verifyJWT(validToken);
+
+        // Assert
+        if(result instanceof Object) {
+            expect(result.username).toEqual(user.username);
         } else {
-            // Handle the case where verified is a string (token is blacklisted or invalid)
             fail('Token verification failed');
         }
     });
