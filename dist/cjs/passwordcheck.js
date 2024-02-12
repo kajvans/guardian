@@ -21,14 +21,14 @@ class PassCheck {
     }
     verifyPassword(password, hash) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield bcrypt_1.default.compare(password, hash);
+            return Promise.resolve(yield bcrypt_1.default.compare(password, hash));
         });
     }
     hashPassword(password) {
         return __awaiter(this, void 0, void 0, function* () {
             const salt = yield bcrypt_1.default.genSalt(this.BcryptSaltRounds);
             const hash = yield bcrypt_1.default.hash(password, salt);
-            return hash;
+            return Promise.resolve(hash);
         });
     }
 }

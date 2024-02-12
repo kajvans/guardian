@@ -7,12 +7,15 @@ export default class JwtAuth {
         [key: string]: any;
     }, settings?: jwt.SignOptions, secretKey?: string): string;
     verifyJWT(token: string, secretKey?: string): jwt.JwtPayload | undefined;
-    decodeJWT(token: string): string | jwt.JwtPayload | null;
-    getJWTExpirationDate(token: string): any;
-    isJWTExpired(token: string): boolean | {
+    decodeJWT(token: string): jwt.JwtPayload;
+    getJWTExpirationDate(token: string): number | {
         valid: boolean;
         message: string;
     };
+    isJWTExpired(token: string): {
+        valid: boolean;
+        message: string;
+    } | boolean;
     refreshJWT(token: string, settings?: jwt.SignOptions, secretKey?: string): string | {
         valid: boolean;
         message: string;

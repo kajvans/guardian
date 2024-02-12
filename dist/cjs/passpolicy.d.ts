@@ -11,16 +11,10 @@ export default class PassPolicy {
     });
     validate(password: string): {
         valid: boolean;
-        message: string;
-    } | {
-        valid: boolean;
-        message?: undefined;
+        message?: string;
     };
     CheckDifference(newPassword: string, oldPassword: string, neededDifference?: number): {
         valid: boolean;
-        message: string;
-    } | {
-        valid: boolean;
-        message?: undefined;
+        message?: string;
     };
 }

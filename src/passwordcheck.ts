@@ -10,12 +10,12 @@ export default class PassCheck{
     }
 
     async verifyPassword(password: string, hash: string): Promise<boolean> {
-        return await bcrypt.compare(password, hash);
+        return Promise.resolve(await bcrypt.compare(password, hash));
     }
 
     async hashPassword(password: string): Promise<string> {
         const salt = await bcrypt.genSalt(this.BcryptSaltRounds);
         const hash = await bcrypt.hash(password, salt);
-        return hash;
+        return Promise.resolve(hash);
     }
 }

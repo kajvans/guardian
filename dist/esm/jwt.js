@@ -1,30 +1,5 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const jwt = __importStar(require("jsonwebtoken"));
-class JwtAuth {
+import * as jwt from 'jsonwebtoken';
+export default class JwtAuth {
     constructor(JWTSecretKey) {
         this.JWTSecretKey = JWTSecretKey;
         this.blacklist = [];
@@ -38,7 +13,7 @@ class JwtAuth {
                 return { valid: false, message: "Token is blacklisted." };
             const vertoken = jwt.verify(token, secretKey);
             if (vertoken instanceof Object) {
-                return vertoken;
+                return (vertoken);
             }
             else {
                 return undefined;
@@ -51,7 +26,13 @@ class JwtAuth {
     decodeJWT(token) {
         if (this.blacklist.includes(token))
             return { valid: false, message: "Token is blacklisted." };
-        return jwt.decode(token);
+        const decoded = jwt.decode(token);
+        if (decoded instanceof Object) {
+            return decoded;
+        }
+        else {
+            return { valid: false, message: "Token is invalid." };
+        }
     }
     getJWTExpirationDate(token) {
         if (this.blacklist.includes(token))
@@ -63,7 +44,9 @@ class JwtAuth {
         if (this.blacklist.includes(token))
             return { valid: false, message: "Token is blacklisted." };
         const expirationDate = this.getJWTExpirationDate(token);
-        return expirationDate < Date.now();
+        if (expirationDate instanceof Object)
+            return expirationDate;
+        return expirationDate < (Date.now() / 1000);
     }
     refreshJWT(token, settings = {}, secretKey = this.JWTSecretKey) {
         if (this.blacklist.includes(token))
@@ -118,4 +101,3 @@ class JwtAuth {
         return { valid: false, message: "Token is not blacklisted." };
     }
 }
-exports.default = JwtAuth;
